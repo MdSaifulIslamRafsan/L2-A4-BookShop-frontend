@@ -1,4 +1,4 @@
-import { Typography, Card, Row, Col, Divider, Carousel } from "antd";
+import { Typography, Card, Row, Col,  Carousel } from "antd";
 import {
   FaStore,
   FaUsers,
