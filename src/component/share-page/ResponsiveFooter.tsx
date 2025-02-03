@@ -30,8 +30,9 @@ const ResponsiveFooter = () => {
     <>
       <Row
         gutter={[16, 16]}
-        style={{ maxWidth: "1720px", margin: "0 auto", width: "100%" }}
+        style={{ maxWidth: "1720px", margin: "0 auto", width: "100%", padding: "40px 0px" }}
         justify="center"
+
       >
         {/* About Section */}
         <Col
@@ -48,7 +49,7 @@ const ResponsiveFooter = () => {
           >
             About Us
           </h3>
-          <p>We provide the best book collections for your reading journey.</p>
+          <p className="font-open-sans">We provide the best book collections for your reading journey.</p>
         </Col>
 
         {/* Quick Links */}
@@ -74,7 +75,7 @@ const ResponsiveFooter = () => {
                   style={{ color: "#000", textDecoration: "none" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "blue";
+                    target.style.color = "#1677ff";
                     target.style.textDecoration = "underline";
                   }}
                   onMouseLeave={(e) => {
@@ -107,8 +108,8 @@ const ResponsiveFooter = () => {
           >
             Contact Us
           </h3>
-          <p>Email: info@bookshop.com</p>
-          <p>Phone: +123 456 7890</p>
+          <p className="font-open-sans">Email: info@bookshop.com</p>
+          <p className="font-open-sans">Phone: +123 456 7890</p>
         </Col>
         {/* Social Media Icons Section */}
         <Col style={{ padding: "0" }} xs={24} md={8} lg={6}>

@@ -2,19 +2,20 @@ import { Button, Drawer, Grid, Menu } from "antd";
 import { useState } from "react";
 import { CgMenuRightAlt } from "react-icons/cg";
 import { FaBook } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const { useBreakpoint } = Grid;
 
 const items = [
-  { key: "1", label: <Link to="/">Home</Link> },
-  { key: "2", label: <Link to="/about">About</Link> },
-  { key: "3", label: <Link to="/books">Books</Link> },
+  { key: "/", label: <Link to="/">Home</Link> },
+  { key: "/about", label: <Link to="/about">About</Link> },
+  { key: "/books", label: <Link to="/books">Books</Link> },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
+  const location = useLocation();
   return (
     <div
       style={{
@@ -30,7 +31,6 @@ const Navbar = () => {
       <Link
         to="/"
         style={{
-          fontSize: "24px",
           fontWeight: "bold",
           cursor: "pointer",
           display :"flex",
@@ -38,17 +38,17 @@ const Navbar = () => {
           textDecoration: "none",
           fontFamily: "Open Sans, sans-serif",
         }}
-        className="font-open-sans"
+        className="font-open-sans logo"
       >
         <FaBook />
-       <p>Bookstore</p>
+       <span>Bookstore</span>
       </Link>
 
       {/* Desktop Menu (Only visible on larger screens) */}
       {screens.md && (
         <Menu
           mode="horizontal"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[location.pathname]}
           items={items}
           className="font-open-sans"
           style={{
@@ -103,7 +103,7 @@ const Navbar = () => {
           <div style={{ flexGrow: 1 }}>
             <Menu
               mode="vertical"
-              defaultSelectedKeys={["1"]}
+              selectedKeys={[location.pathname]}
               items={items}
               onClick={() => setOpen(false)}
             />
