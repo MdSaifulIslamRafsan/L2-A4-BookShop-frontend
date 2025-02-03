@@ -1,13 +1,14 @@
 import { Layout } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Navbar from "./component/share-page/Navbar";
+import ResponsiveFooter from "./component/share-page/ResponsiveFooter";
 
 function App() {
   return (
     <>
       <Layout
         style={{
-          minHeight: "300vh",
+          minHeight: "100vh",
 
           overflow: "hidden",
         }}
@@ -36,8 +37,15 @@ function App() {
             Content
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+        <Footer
+          style={{
+            textAlign: "center",
+            background: "#fff",
+            width: "100%",
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <ResponsiveFooter></ResponsiveFooter>
         </Footer>
       </Layout>
     </>

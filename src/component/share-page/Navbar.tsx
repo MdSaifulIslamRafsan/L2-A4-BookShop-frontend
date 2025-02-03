@@ -23,7 +23,6 @@ const Navbar = () => {
         alignItems: "center",
         width: "100%",
         maxWidth: "1720px",
-        padding: "16px",
         margin: "0 auto",
       }}
     >
@@ -34,13 +33,15 @@ const Navbar = () => {
           fontSize: "24px",
           fontWeight: "bold",
           cursor: "pointer",
+          display :"flex",
+          alignItems: "center",
           textDecoration: "none",
           fontFamily: "Open Sans, sans-serif",
         }}
         className="font-open-sans"
       >
         <FaBook />
-        Book-Shop
+       <p>Bookstore</p>
       </Link>
 
       {/* Desktop Menu (Only visible on larger screens) */}
