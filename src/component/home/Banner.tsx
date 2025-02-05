@@ -1,5 +1,5 @@
-import { Carousel, Col, Row, Typography } from "antd";
-const {Paragraph} = Typography;
+import { Button, Carousel, Col, Row, Typography } from "antd";
+const { Paragraph } = Typography;
 
 const contentStyle: React.CSSProperties = {
   minHeight: "450px",
@@ -60,6 +60,13 @@ const Banner = () => {
                 >
                   {item.description}
                 </Paragraph>
+                <Button
+                  type="primary"
+                  size="large"
+                  style={{ marginTop: "12px" }}
+                >
+                  Learn More
+                </Button>
               </Col>
               <Col
                 xs={24}
