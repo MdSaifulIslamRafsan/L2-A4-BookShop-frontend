@@ -1,5 +1,6 @@
 import Banner from "../component/home/Banner";
 import Faq from "../component/home/Faq";
+import FeaturedProducts from "../component/home/FeaturedProducts";
 
 const Home = () => {
     return (
@@ -9,6 +10,7 @@ const Home = () => {
 
         }}>
             <Banner></Banner>
+            <FeaturedProducts></FeaturedProducts>
             <Faq></Faq>
         </main>
     );

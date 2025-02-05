@@ -2,7 +2,11 @@ import { Button, Drawer, Grid, Menu } from "antd";
 import { useState } from "react";
 import { CgMenuRightAlt } from "react-icons/cg";
 import { FaBook } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { toast } from "sonner";
 
 const { useBreakpoint } = Grid;
 
@@ -13,9 +17,21 @@ const items = [
 ];
 
 const Navbar = () => {
+  const user = useSelector(selectCurrentUser);
+  const navigate = useNavigate();
+const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
   const location = useLocation();
+
+  const handleLogout = () => {
+    dispatch(logout())
+    toast.success("Logged out successfully")
+
+    navigate('/sign-in')
+
+  }
+
   return (
     <div
       style={{
@@ -65,16 +81,20 @@ const Navbar = () => {
             gap: "16px",
           }}
         >
-          <Link to="/sign-in">
-            <Button className="font-open-sans" type="primary" size={"large"}>
-              Sign In
-            </Button>
-          </Link>
-          <Link to="/sign-up">
-            <Button className="font-open-sans" type="primary" size={"large"}>
-              Sign Up
-            </Button>
-          </Link>
+           {!user ? <>
+              <Link to="/sign-in">
+              <Button type="primary" block>
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/sign-up">
+              <Button type="primary" block>
+                Sign Up
+              </Button>
+            </Link>
+            </> :  <Button onClick={handleLogout} type="primary" block>
+                Log Out
+              </Button>}
         </div>
       ) : (
         <Button
@@ -119,7 +139,8 @@ const Navbar = () => {
               borderTop: "1px solid #ddd",
             }}
           >
-            <Link to="/sign-in">
+            {!user ? <>
+              <Link to="/sign-in">
               <Button type="primary" block>
                 Sign In
               </Button>
@@ -129,6 +150,9 @@ const Navbar = () => {
                 Sign Up
               </Button>
             </Link>
+            </> :  <Button onClick={handleLogout} type="primary" block>
+                Log Out
+              </Button>}
           </div>
         </div>
       </Drawer>

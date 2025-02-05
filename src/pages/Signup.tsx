@@ -3,12 +3,22 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 
 import BSForm from "../component/form/BSForm";
 import BSInput from "../component/form/BSInput";
+import { useSignupMutation } from "../redux/features/auth/authApi";
+import { TMessage } from './../types/errorTypes';
+import { toast } from "sonner";
 
 const { Title } = Typography;
 
 const Signup = () => {
+  const [signup] = useSignupMutation();
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    try {
+      await signup(data).unwrap();
+      toast.success("Account created successfully!");
+    } catch (error) {
+      toast.error((error as TMessage).data.message);
+    };
   };
 
   return (
