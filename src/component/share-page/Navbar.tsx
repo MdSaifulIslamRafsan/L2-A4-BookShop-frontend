@@ -13,7 +13,7 @@ const { useBreakpoint } = Grid;
 const items = [
   { key: "/", label: <Link to="/">Home</Link> },
   { key: "/about", label: <Link to="/about">About</Link> },
-  { key: "/books", label: <Link to="/books">Books</Link> },
+  { key: "/products", label: <Link to="/products">Products</Link> },
 ];
 
 const Navbar = () => {
