@@ -6,16 +6,19 @@ import BSInput from "../component/form/BSInput";
 import { useSignupMutation } from "../redux/features/auth/authApi";
 import { TMessage } from './../types/errorTypes';
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
 const Signup = () => {
   const [signup] = useSignupMutation();
+  const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       await signup(data).unwrap();
       toast.success("Account created successfully!");
+      navigate('/sign-in')
     } catch (error) {
       toast.error((error as TMessage).data.message);
     };
