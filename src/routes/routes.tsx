@@ -9,6 +9,7 @@ import Signup from "../pages/Signup";
 import Products from "../pages/Products";
 import ProductDetails from "../pages/ProductDetails";
 import NotFound from "../pages/NotFound";
+import Dashboard from "../component/layout/Dashboard/Dashboard";
 
 
   export const router = createBrowserRouter([
@@ -43,5 +44,10 @@ import NotFound from "../pages/NotFound";
         },
         
       ],
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard></Dashboard>,
+      
     },
   ]);

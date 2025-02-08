@@ -7,8 +7,9 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const token = useSelector(useCurrentToken);
 
   if (!token) {
-    return <Navigate to={"/login"} replace />;
+    return <Navigate to={"/sign-in"} replace />;
   }
+  
 
   return children;
 };

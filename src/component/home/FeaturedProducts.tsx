@@ -1,39 +1,62 @@
 import { Card, Button, Row, Col, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../../redux/features/Products/ProductsApi";
-import { Product } from "../../types";
+import { TProduct } from "../../types";
+import CardLoading from "../Loading/CardLoading";
 
 const { Title, Text } = Typography;
 const FeaturedProducts = () => {
   const navigate = useNavigate();
-  const {data , isLoading} = useGetProductsQuery(undefined);
-  if (isLoading) return <div>Loading...</div>;
+  const { data, isLoading } = useGetProductsQuery(undefined);
+  if (isLoading) {
+    return <CardLoading isLoading={isLoading}></CardLoading>;
+  }
   const featuredProducts = data?.data || [];
-
-  
 
   return (
     <div style={{ paddingTop: "70px", textAlign: "center" }}>
       <Title level={2} style={{ marginBottom: "20px" }}>
         Featured Products
       </Title>
-      <Row gutter={[16, 16]} >
-        {featuredProducts?.slice(0,6).map((product : Product) => (
-          <Col key={product._id} xs={24} sm={12} md={8} >
+      <Row gutter={[16, 16]}>
+        {featuredProducts?.slice(0, 6).map((product: TProduct) => (
+          <Col key={product._id} xs={24} sm={12} md={8}>
             <Card
               hoverable
-              cover={<img style={{
-                height: "300px",
-              }}  alt={product.title} src={product.image} />}
+              cover={
+                <div
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    background: "#F5F5F5",
+                    padding: "20px",
+                    borderRadius: 8,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    style={{
+                      width: "60%",
+                      height: "100%",
+                      borderRadius: 8,
+                    }}
+                    alt={product.title}
+                    src={product.image}
+                  />
+                </div>
+              }
               style={{
                 width: "100%",
-                borderRadius: "8px",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                 textAlign: "left",
                 padding: "20px",
               }}
             >
-              <Title level={4} style={{ marginBottom: "10px", fontSize: "18px" }}>
+              <Title
+                level={4}
+                style={{ marginBottom: "10px", fontSize: "18px" }}
+              >
                 {product.title}
               </Title>
               <div style={{ marginBottom: "10px" }}>
@@ -60,6 +83,7 @@ const FeaturedProducts = () => {
           </Col>
         ))}
       </Row>
+
       <Button
         type="primary"
         size="large"

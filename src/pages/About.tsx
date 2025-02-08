@@ -1,4 +1,4 @@
-import { Typography, Card, Row, Col,  Carousel } from "antd";
+import { Typography, Card, Row, Col, Carousel } from "antd";
 import {
   FaStore,
   FaUsers,
@@ -74,12 +74,12 @@ const About = () => {
         </Paragraph>
       </div>
 
-
       {/* About Sections */}
       <Row gutter={[24, 24]}>
         {aboutSections.map((section, index) => (
           <Col xs={24} md={12} key={index}>
             <Card
+              hoverable
               title={section.title}
               bordered={false}
               style={{
@@ -101,7 +101,6 @@ const About = () => {
         ))}
       </Row>
 
-
       {/* Customer Reviews */}
 
       <div style={{ textAlign: "center", margin: "90px 0" }}>
@@ -118,23 +117,27 @@ const About = () => {
         >
           {reviews.map((review, index) => (
             <div key={index} style={{ padding: "20px" }}>
-              <div
+              <Card
+                hoverable
                 style={{
                   background: "#fff",
-                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                  borderRadius: "10px",
                   padding: "20px",
                   textAlign: "center",
                   minHeight: "150px",
                 }}
               >
-                <FaStar
-                  style={{
-                    fontSize: "24px",
-                    color: "#FFC107",
-                    marginBottom: "10px",
-                  }}
-                />
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <FaStar
+                    key={i}
+                    style={{
+                      fontSize: "20px",
+                      color: "#FFC107",
+                      marginBottom: "10px",
+                      marginLeft: i === 0 ? "0" : "6px",
+                    }}
+                  />
+                ))}
+
                 <p style={{ fontSize: "16px", color: "#555" }}>
                   "{review.text}"
                 </p>
@@ -148,12 +151,11 @@ const About = () => {
                 >
                   - {review.name}
                 </p>
-              </div>
+              </Card>
             </div>
           ))}
         </Carousel>
       </div>
-
 
       {/* Contact Section */}
       <div style={{ textAlign: "center" }}>

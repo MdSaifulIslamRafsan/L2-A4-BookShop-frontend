@@ -10,11 +10,7 @@ import { toast } from "sonner";
 
 const { useBreakpoint } = Grid;
 
-const items = [
-  { key: "/", label: <Link to="/">Home</Link> },
-  { key: "/about", label: <Link to="/about">About</Link> },
-  { key: "/products", label: <Link to="/products">Products</Link> },
-];
+
 
 const Navbar = () => {
   const user = useSelector(selectCurrentUser);
@@ -23,6 +19,15 @@ const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const screens = useBreakpoint();
   const location = useLocation();
+  const items = [
+    { key: "/", label: <Link to="/">Home</Link> },
+    { key: "/about", label: <Link to="/about">About</Link> },
+    { key: "/products", label: <Link to="/products">Products</Link> },
+    user && {
+      key: "/dashboard",
+      label: <Link to="/dashboard">Dashboard</Link> ,
+    }
+  ];
 
   const handleLogout = () => {
     dispatch(logout())
