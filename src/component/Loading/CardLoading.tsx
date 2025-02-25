@@ -1,17 +1,30 @@
-import { Skeleton, Space, Card } from "antd";
+import { Skeleton, Space, Card, Row, Col } from "antd";
 
-const CardLoading = ({ isLoading }: { isLoading: boolean }) => {
+const CardLoading = () => {
   return (
     <Space
       direction="vertical"
       style={{ width: "100%", paddingTop: "100px", paddingBottom: "70px" }}
       size={16}
     >
-      <Card >
-        <Skeleton loading={isLoading} active>
-          <h4 style={{ marginBottom: 16 }}>Loading...</h4>
-        </Skeleton>
-      </Card>
+      <Row gutter={16}>
+        <Col span={8}>
+          <Card>
+            <Skeleton active title paragraph={{ rows: 2 }} />
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card>
+            <Skeleton active title paragraph={{ rows: 2 }} />
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card>
+            <Skeleton active title paragraph={{ rows: 2 }} />
+          </Card>
+        </Col>
+       
+      </Row>
     </Space>
   );
 };

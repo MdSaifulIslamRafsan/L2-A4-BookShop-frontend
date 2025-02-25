@@ -64,7 +64,7 @@ const Products = () => {
     );
   });
   if (isLoading) {
-    return <CardLoading isLoading={isLoading}></CardLoading>;
+    return <CardLoading></CardLoading>;
   }
 
   const paginateProducts = filteredProducts.slice(

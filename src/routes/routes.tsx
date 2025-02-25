@@ -13,6 +13,7 @@ import Dashboard from "../component/layout/Dashboard/Dashboard";
 import CheckoutPage from "../pages/CheckOut";
 import OrderVerifyPage from "../pages/OrderVerify";
 import UserManagement from "../pages/admin/UserManagement";
+import Orders from "../pages/user/Orders";
 
 
   export const router = createBrowserRouter([
@@ -45,16 +46,16 @@ import UserManagement from "../pages/admin/UserManagement";
           path: "/Products/:id",
           element: <ProductDetails></ProductDetails>,
         },
-        {
-          path: "/sign-in",
-          element: <Signin></Signin>,
-        },
-        {
-          path: "/sign-up",
-          element: <Signup></Signup>,
-        },
         
       ],
+    },
+    {
+      path: "/sign-in",
+      element: <Signin></Signin>,
+    },
+    {
+      path: "/sign-up",
+      element: <Signup></Signup>,
     },
     {
       path: "/dashboard",
@@ -63,6 +64,10 @@ import UserManagement from "../pages/admin/UserManagement";
         {
           path: "user-management",
           element: <UserManagement/>,
+        },
+        {
+          path: "order-history",
+          element: <Orders/>,
         }
       ],
       

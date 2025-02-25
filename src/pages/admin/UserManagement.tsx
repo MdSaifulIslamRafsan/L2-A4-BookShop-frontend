@@ -7,6 +7,7 @@ import {
 } from "../../redux/features/users/usersApi";
 import { toast } from "sonner";
 import { TMessage } from "../../types";
+import TableLoading from "../../component/Loading/TableLoading";
 type TUser = {
   _id: string;
   name: string;
@@ -20,7 +21,9 @@ const UserManagement: React.FC = () => {
   const { data, isLoading, refetch } = useUsersQuery(undefined);
   const [updateUserRole] = useUpdateUserRoleMutation();
   const [updateUserStatus] = useUpdateUserStatusMutation();
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)  {
+    return <TableLoading></TableLoading>
+  };
 
   const handleStatusChange = async (userId: string, isActive: boolean) => {
     try {
@@ -74,7 +77,7 @@ const UserManagement: React.FC = () => {
       title: "Role",
       dataIndex: "role",
       key: "role",
-      width: 130,
+      width: 80,
       render: (role: "admin" | "user", record: TUser) => (
         <Dropdown
           menu={{
@@ -92,7 +95,7 @@ const UserManagement: React.FC = () => {
             ],
           }}
         >
-          <Button style={{ width: "100%", textAlign: "left", textTransform: "capitalize" }}>
+          <Button style={{ width: "100%", textAlign: "left", textTransform: "capitalize",  display: "flex", justifyContent: "space-between"  }}>
             {role} <DownOutlined />
           </Button>
         </Dropdown>
@@ -102,7 +105,7 @@ const UserManagement: React.FC = () => {
       title: "Status",
       dataIndex: "isActive",
       key: "isActive",
-      width: 140,
+      width: 80,
       render: (isActive: boolean, record: TUser) => (
         <Dropdown
           menu={{
@@ -120,7 +123,7 @@ const UserManagement: React.FC = () => {
             ],
           }}
         >
-          <Button style={{ width: "100%", textAlign: "left" }}>
+          <Button style={{ width: "100%", textAlign: "left",  display: "flex", justifyContent: "space-between"  }}>
             <Tag color={isActive ? "green" : "red"}>
               {isActive ? "Active" : "Inactive"}
             </Tag>

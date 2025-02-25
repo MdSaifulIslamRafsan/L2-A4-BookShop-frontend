@@ -40,7 +40,7 @@ const Signin = () => {
     <Row
       align="middle"
       justify="center"
-      style={{ height: "100vh", backgroundColor: "#f0f2f5", marginTop: "50px" }}
+      style={{ height: "100vh", backgroundColor: "#f0f2f5", }}
     >
       <Card
         style={{

@@ -37,7 +37,7 @@ const OrderVerificationPage = () => {
 
   // Handle loading and error states before rendering anything else
   if (isLoading || orderIsLoading) {
-    return <CardLoading isLoading={isLoading} />;
+    return <CardLoading />;
   }
   if (error || orderError) {
     return <div>Error fetching order data</div>;

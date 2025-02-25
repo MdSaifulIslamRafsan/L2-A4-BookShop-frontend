@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   if (isLoading) {
-    return <CardLoading isLoading={isLoading}></CardLoading>;
+    return <CardLoading ></CardLoading>;
   }
   const product = data?.data || {};
 

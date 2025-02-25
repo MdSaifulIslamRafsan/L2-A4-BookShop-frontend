@@ -25,7 +25,7 @@ const Signup = () => {
   };
 
   return (
-    <Row align="middle" justify="center" style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" , padding: "140px 0 90px 0" }}>
+    <Row align="middle" justify="center" style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" , }}>
       <Card
         style={{
           width: 400,

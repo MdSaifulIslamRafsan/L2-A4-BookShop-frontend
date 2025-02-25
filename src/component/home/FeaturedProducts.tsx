@@ -9,7 +9,7 @@ const FeaturedProducts = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductsQuery(undefined);
   if (isLoading) {
-    return <CardLoading isLoading={isLoading}></CardLoading>;
+    return <CardLoading ></CardLoading>;
   }
   const featuredProducts = data?.data || [];
 

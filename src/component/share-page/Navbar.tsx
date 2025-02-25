@@ -25,7 +25,7 @@ const dispatch = useAppDispatch();
     { key: "/products", label: <Link to="/products">Products</Link> },
     user && {
       key: "/dashboard",
-      label: <Link to={user.role === "admin" ? "/dashboard/user-management" : ""}>Dashboard</Link> ,
+      label: <Link to={user.role === "admin" ? "/dashboard/user-management" : "/dashboard/order-history"}>Dashboard</Link> ,
     }
   ];
 
