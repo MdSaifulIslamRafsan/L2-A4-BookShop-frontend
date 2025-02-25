@@ -1,4 +1,4 @@
-export type TUserRoles = "admin" | "faculty" | "student"
+export type TUserRoles = "admin" |  "user"
 export type TUser = {
     role: TUserRoles,
     email : string,

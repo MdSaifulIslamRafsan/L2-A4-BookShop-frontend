@@ -1,23 +1,46 @@
 import { Card, Button, Typography, Row, Col } from "antd";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGetProductQuery } from "../redux/features/Products/ProductsApi";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/features/cart/cartSlice";
 import CardLoading from "../component/Loading/CardLoading";
-import ProtectedRoute from "../component/layout/ProtectedRoute";
 
 const { Title, Text } = Typography;
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetProductQuery(id);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <CardLoading isLoading={isLoading}></CardLoading>;
   }
   const product = data?.data || {};
 
+  const handleBuyNow = () => {
+    dispatch(
+      addToCart({
+        _id: product._id,
+        title: product.title,
+        author: product.author,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        quantity: 1,
+      })
+    );
+    navigate("/checkout");
+  };
+
   return (
-    <ProtectedRoute>
-      <Card style={{ margin: "100px 0 70px 0", borderRadius: 10 }}>
+      <Card
+        style={{
+          margin: "100px auto 70px auto",
+          borderRadius: 10,
+          maxWidth: "1720px",
+        }}
+      >
         <Row gutter={[64, 32]} justify="center" align="middle">
           {/* Image Section */}
           <Col xs={24} lg={12} style={{ textAlign: "center" }}>
@@ -51,15 +74,12 @@ const ProductDetails = () => {
               Price: ${product.price}
             </Text>
             <br />
-            <Link to={"/checkout"}>
-              <Button type="primary" block style={{ marginTop: 15 }}>
-                Buy Now
-              </Button>
-            </Link>
+            <Button type="primary" block style={{ marginTop: 15 }} onClick={handleBuyNow}>
+              Buy Now
+            </Button>
           </Col>
         </Row>
       </Card>
-    </ProtectedRoute>
   );
 };
 

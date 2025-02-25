@@ -1,5 +1,5 @@
 export interface TMessage {
-    data : {
-     message: string;
-    }
-   }
+  data: {
+    message: string;
+  };
+}

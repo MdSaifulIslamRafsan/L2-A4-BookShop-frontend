@@ -76,7 +76,8 @@ const Products = () => {
     setCurrentPage(page);
   };
   return (
-    <div style={{ paddingTop: "100px", paddingBottom: "90px" }}>
+    <div style={{ paddingTop: "100px", paddingBottom: "90px",    maxWidth: "1720px",
+      margin: "0 auto", }}>
       <Row gutter={[32, 32]}>
         {/* Filter Section (Left Side) */}
         <Col xs={24} sm={8} md={6}>

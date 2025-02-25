@@ -4,7 +4,7 @@ import { useGetProductsQuery } from "../../redux/features/Products/ProductsApi";
 import { TProduct } from "../../types";
 import CardLoading from "../Loading/CardLoading";
 
-const { Title, Text } = Typography;
+const { Title, Text, Paragraph } = Typography;
 const FeaturedProducts = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductsQuery(undefined);
@@ -14,11 +14,28 @@ const FeaturedProducts = () => {
   const featuredProducts = data?.data || [];
 
   return (
-    <div style={{ paddingTop: "70px", textAlign: "center" }}>
+    <div
+      style={{
+        paddingTop: "70px",
+        textAlign: "center",
+        maxWidth: "1720px",
+        margin: "0 auto",
+      }}
+    >
       <Title level={2} style={{ marginBottom: "20px" }}>
         Featured Products
       </Title>
-      <Row gutter={[16, 16]}>
+      {/* Section Description */}
+      <Paragraph
+        className="font-open-sans"
+        style={{ fontSize: "16px", color: "#555" }}
+      >
+        Explore our collection of bestselling and featured books. Find your next
+        great read!
+      </Paragraph>
+      <Row gutter={[16, 16]} style={{
+        marginTop: "30px"
+      }}>
         {featuredProducts?.slice(0, 6).map((product: TProduct) => (
           <Col key={product._id} xs={24} sm={12} md={8}>
             <Card

@@ -10,6 +10,9 @@ import Products from "../pages/Products";
 import ProductDetails from "../pages/ProductDetails";
 import NotFound from "../pages/NotFound";
 import Dashboard from "../component/layout/Dashboard/Dashboard";
+import CheckoutPage from "../pages/CheckOut";
+import OrderVerifyPage from "../pages/OrderVerify";
+import UserManagement from "../pages/admin/UserManagement";
 
 
   export const router = createBrowserRouter([
@@ -31,6 +34,14 @@ import Dashboard from "../component/layout/Dashboard/Dashboard";
           element: <Products></Products>,
         },
         {
+          path: "/checkout",
+          element: <CheckoutPage></CheckoutPage>,
+        },
+        {
+          path: "/order/verify",
+          element: <OrderVerifyPage></OrderVerifyPage>,
+        },
+        {
           path: "/Products/:id",
           element: <ProductDetails></ProductDetails>,
         },
@@ -48,6 +59,12 @@ import Dashboard from "../component/layout/Dashboard/Dashboard";
     {
       path: "/dashboard",
       element: <Dashboard></Dashboard>,
+      children: [
+        {
+          path: "user-management",
+          element: <UserManagement/>,
+        }
+      ],
       
     },
   ]);
