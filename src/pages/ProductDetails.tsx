@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   if (isLoading) {
-    return <CardLoading ></CardLoading>;
+    return <CardLoading></CardLoading>;
   }
   const product = data?.data || {};
 
@@ -28,58 +28,89 @@ const ProductDetails = () => {
         price: product.price,
         image: product.image,
         quantity: 1,
+        category: product.category,
       })
     );
     navigate("/checkout");
   };
 
   return (
-      <Card
-        style={{
-          margin: "100px auto 70px auto",
-          borderRadius: 10,
-          maxWidth: "1720px",
-        }}
-      >
-        <Row gutter={[64, 32]} justify="center" align="middle">
-          {/* Image Section */}
-          <Col xs={24} lg={12} style={{ textAlign: "center" }}>
-            <div
+    <Card
+      style={{
+        margin: "100px auto 70px auto",
+        borderRadius: 10,
+        maxWidth: "1720px",
+      }}
+    >
+      <Row gutter={[64, 32]} justify="center" align="middle">
+        {/* Image Section */}
+        <Col xs={24} lg={12} style={{ textAlign: "center" }}>
+          <div
+            style={{
+              width: "100%",
+              height: "400px",
+              background: "#F5F5F5",
+              padding: "20px",
+              borderRadius: 8,
+            }}
+          >
+            <img
+              src={product?.image}
+              alt={product.title}
               style={{
-                width: "100%",
-                height: "400px",
-                background: "#F5F5F5",
-                padding: "20px",
+                width: "50%",
+                height: "100%",
                 borderRadius: 8,
               }}
-            >
-              <img
-                src={product?.image}
-                alt={product.title}
-                style={{
-                  width: "60%",
-                  height: "100%",
-                  borderRadius: 8,
-                }}
-              />
-            </div>
-          </Col>
+            />
+          </div>
+        </Col>
 
-          {/* Product Details */}
-          <Col xs={24} lg={12}>
-            <Title level={3}>{product.title}</Title>
-            <Text strong>Author: {product.author}</Text>
-            <p style={{ marginTop: 10 }}>{product.description}</p>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-              Price: ${product.price}
-            </Text>
-            <br />
-            <Button type="primary" block style={{ marginTop: 15 }} onClick={handleBuyNow}>
-              Buy Now
-            </Button>
-          </Col>
-        </Row>
-      </Card>
+        {/* Product Details */}
+        <Col xs={24} lg={12}>
+          <Title level={3}>{product.title}</Title>
+          <Text strong>Author: {product.author}</Text>
+          <p style={{ marginTop: 10 }}>{product.description}</p>
+          <Text
+            style={{
+              display: "block",
+              marginTop: "10px",
+            }}
+            strong
+          >
+            Category: {product.category}
+          </Text>
+          <Text
+            style={{
+              display: "block",
+              marginTop: "10px",
+            }}
+            strong
+          >
+            Quantity: {product.quantity}
+          </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              display: "block",
+              marginTop: "10px",
+            }}
+          >
+            Price: ${product.price}
+          </Text>
+          <br />
+          <Button
+            type="primary"
+            block
+            style={{ marginTop: 15 }}
+            onClick={handleBuyNow}
+          >
+            Buy Now
+          </Button>
+        </Col>
+      </Row>
+    </Card>
   );
 };
 

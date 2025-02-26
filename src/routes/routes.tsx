@@ -16,6 +16,7 @@ import UserManagement from "../pages/admin/UserManagement";
 import Orders from "../pages/user/Orders";
 import AdminProtectedRoute from "../component/layout/AdminProtectedRoute";
 import ProtectedRoute from "../component/layout/ProtectedRoute";
+import UpdatePassword from "../pages/user/UpdatePassword";
 
 
   export const router = createBrowserRouter([
@@ -67,10 +68,16 @@ import ProtectedRoute from "../component/layout/ProtectedRoute";
           path: "user-management",
           element: <AdminProtectedRoute><UserManagement/></AdminProtectedRoute>,
         },
+
+        // user routes
         {
           path: "order-history",
           element: <ProtectedRoute><Orders/></ProtectedRoute>,
-        }
+        },
+        {
+          path: "update-password",
+          element: <ProtectedRoute><UpdatePassword/></ProtectedRoute>,
+        },
       ],
       
     },

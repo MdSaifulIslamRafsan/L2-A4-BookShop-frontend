@@ -9,6 +9,7 @@ interface CartItem {
   author: string;
   description: string;
   image: string;
+  category : string;
 }
 
 interface CartState {

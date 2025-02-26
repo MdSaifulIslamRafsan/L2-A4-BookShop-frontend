@@ -7,6 +7,7 @@ import { TUser } from "../../../types";
 import { useAppDispatch } from "../../../redux/hooks";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { toast } from "sonner";
+import { IoMdSettings } from "react-icons/io";
 
 const { Sider } = Layout;
 
@@ -39,6 +40,11 @@ const Sidebar = ({ user }: { user: TUser }) => {
           icon: <FaBoxOpen  />,
           label: <NavLink to="order-history">Order History </NavLink>,
         },
+        {
+          key: "2",
+          icon: <IoMdSettings  />,
+          label: <NavLink to="update-password">Update Password</NavLink>,
+        },
       ];
 
   return (
@@ -51,7 +57,7 @@ const Sidebar = ({ user }: { user: TUser }) => {
         onBreakpoint={(broken) => setIsMobile(broken)}
         style={{
           background: "#fff",
-          height: "100vh",
+          minHeight: "100vh",
           ...(isMobile
             ? { position: "fixed", left: 0, top: 0, zIndex: "50" }
             : { position: "relative" }),
