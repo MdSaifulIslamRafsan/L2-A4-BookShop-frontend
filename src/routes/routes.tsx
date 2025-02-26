@@ -14,6 +14,8 @@ import CheckoutPage from "../pages/CheckOut";
 import OrderVerifyPage from "../pages/OrderVerify";
 import UserManagement from "../pages/admin/UserManagement";
 import Orders from "../pages/user/Orders";
+import AdminProtectedRoute from "../component/layout/AdminProtectedRoute";
+import ProtectedRoute from "../component/layout/ProtectedRoute";
 
 
   export const router = createBrowserRouter([
@@ -36,11 +38,11 @@ import Orders from "../pages/user/Orders";
         },
         {
           path: "/checkout",
-          element: <CheckoutPage></CheckoutPage>,
+          element: <ProtectedRoute><CheckoutPage></CheckoutPage></ProtectedRoute> ,
         },
         {
           path: "/order/verify",
-          element: <OrderVerifyPage></OrderVerifyPage>,
+          element: <ProtectedRoute><OrderVerifyPage></OrderVerifyPage></ProtectedRoute>,
         },
         {
           path: "/Products/:id",
@@ -63,11 +65,11 @@ import Orders from "../pages/user/Orders";
       children: [
         {
           path: "user-management",
-          element: <UserManagement/>,
+          element: <AdminProtectedRoute><UserManagement/></AdminProtectedRoute>,
         },
         {
           path: "order-history",
-          element: <Orders/>,
+          element: <ProtectedRoute><Orders/></ProtectedRoute>,
         }
       ],
       

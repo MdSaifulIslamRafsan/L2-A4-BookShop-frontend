@@ -7,7 +7,7 @@ import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { TMessage } from "../types";
 
@@ -17,20 +17,20 @@ const { Title } = Typography;
 
 const Signin = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/"; 
   const [login] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     try {
       const res = await login(data).unwrap();
       const token = res.data.accessToken;
       const user = verifyToken(token);
       dispatch(setUser({ user, token }));
       toast.success("Logged in successfully");
-      navigate(`/`);
+      navigate(from, { replace: true });
     } catch (error : unknown) {
       toast.error((error as TMessage).data.message);
     }

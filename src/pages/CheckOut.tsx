@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Card, Row, Col, message, Table } from "antd";
-import { useDispatch } from "react-redux";
+import { Button, Card, Row, Col, message, Table, Input, Form } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import {
   clearCart,
@@ -14,14 +14,24 @@ import BSInput from "../component/form/BSInput";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { TMessage } from "../types";
-import ProtectedRoute from "../component/layout/ProtectedRoute";
+
 import { MdDelete } from "react-icons/md";
 import { FiMinus } from "react-icons/fi";
 import { PiPlus } from "react-icons/pi";
 import { useCreateOrderMutation } from "../redux/features/order/orderApi";
+import { selectCurrentUser } from "../redux/features/auth/authSlice";
+import { useUserQuery } from "../redux/features/users/usersApi";
+import CardLoading from "../component/Loading/CardLoading";
 
 const CheckoutPage: React.FC = () => {
   const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser);
+  const { data: userData, isLoading: UserLoading } = useUserQuery(user?.email, {
+    skip: !user?.email,
+  });
+
+
+
 
   const cartItems = useAppSelector((state: RootState) => state.cart.items);
   const [createOrder, { isLoading }] = useCreateOrderMutation();
@@ -29,21 +39,29 @@ const CheckoutPage: React.FC = () => {
   const totalPrice = useAppSelector(
     (state: RootState) => state.cart.totalPrice
   );
-
-
-
+  if(UserLoading){
+    return <CardLoading/>;
+  }
   const columns = [
     {
       title: "Product",
       dataIndex: "title",
       key: "title",
+      render: (title: string) => (
+        <div style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "150px" }}>
+          {title}
+        </div>
+        )
     },
     {
       title: "Quantity",
       dataIndex: "quantity",
       key: "quantity",
       render: (text: number, record: any) => (
-        <div>
+        <div style={{
+          display: "flex",
+         alignItems: "center",
+        }}>
           <Button
             onClick={() => dispatch(decreaseQuantity(record._id))}
             disabled={text <= 1}
@@ -76,8 +94,8 @@ const CheckoutPage: React.FC = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const orderPayload = {
-      email: data.email,
-      name: data.name,
+      email: userData?.data?.email,
+      name: userData?.data?.name,
       products: cartItems.map((item) => ({
         product: item._id,
         quantity: item.quantity,
@@ -86,14 +104,19 @@ const CheckoutPage: React.FC = () => {
       phone: data.phone,
     };
     try {
-      const order = await createOrder(orderPayload);
-
-      if (order?.data?.data) {
-        setTimeout(() => {
-          message.success("Order placed successfully!");
-          dispatch(clearCart());
-          window.location.href = order?.data?.data;
-        }, 1500);
+      console.log(cartItems)
+      if(cartItems.length > 0) {
+        const order = await createOrder(orderPayload);
+  
+        if (order?.data?.data) {
+          setTimeout(() => {
+            message.success("Order placed successfully!");
+            dispatch(clearCart());
+            window.location.href = order?.data?.data;
+          }, 1500);
+        }
+      }else{
+        toast.error("Cart is empty, please add items to proceed.");
       }
     } catch (error: unknown) {
       toast.error((error as TMessage).data.message);
@@ -101,7 +124,6 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <ProtectedRoute>
       <Card
         style={{
           margin: "80px  auto",
@@ -119,14 +141,24 @@ const CheckoutPage: React.FC = () => {
                   title="Order information"
                 >
                   <div style={{ marginBottom: "16px" }}>
-                    <BSInput label={"Name"} type={"text"} fieldName={"name"} />
+                    <div>
+                      <Form.Item label={"Name"}>
+                      <Input
+                        value={userData?.data?.name}
+                         size="large"
+                        readOnly
+                      />
+                      </Form.Item>
+                    </div>
                   </div>
                   <div style={{ marginBottom: "16px" }}>
-                    <BSInput
-                      label={"Email"}
-                      type={"email"}
-                      fieldName={"email"}
-                    />
+                  <Form.Item label={"Email"}>
+                      <Input
+                        value={userData?.data?.email}
+                         size="large"
+                        readOnly
+                      />
+                      </Form.Item>
                   </div>
                   <div style={{ marginBottom: "16px" }}>
                     <BSInput
@@ -156,6 +188,7 @@ const CheckoutPage: React.FC = () => {
                       columns={columns}
                       pagination={false}
                       rowKey="_id"
+                      scroll={{ x: "max-content" }}
                     />
                   ) : (
                     <p>Your cart is empty</p>
@@ -177,7 +210,6 @@ const CheckoutPage: React.FC = () => {
           </BSForm>
         </Card>
       </Card>
-    </ProtectedRoute>
   );
 };
 

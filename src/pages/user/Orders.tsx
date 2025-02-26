@@ -48,7 +48,7 @@ const Orders: React.FC = () => {
       render: (products: TProduct[]) => (
         <div>
           {products.map((product) => (
-            <div key={product._id}>{product?.quantity}</div>
+            <div key={product._id}>{product?.quantity }</div>
           ))}
         </div>
       ),
@@ -79,7 +79,10 @@ const Orders: React.FC = () => {
           color = "red";
         }
   
-        return <Tag color={color}>{status}</Tag>;
+        return <Tag style={{
+            width :"60px",
+            textAlign: "center",
+        }} color={color}>{status}</Tag>;
       },
   
     },

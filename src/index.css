@@ -56,13 +56,21 @@
 .p-banner{
   padding: 40px 0 ;
 }
-@media (max-width: 639px) {
- 
-}
 
+
+
+@media (min-width: 320px) and (max-width: 639px) {
+  .ant-card-body{
+    padding: 10px !important;
+  }
+
+}
 @media (min-width: 640px) and (max-width: 767px) {
   .p-main {
     padding: 12px !important;
+  }
+  .ant-card-body{
+    padding: 15px !important;
   }
 
 }
