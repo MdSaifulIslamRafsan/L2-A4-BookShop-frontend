@@ -1,6 +1,6 @@
 import { Button, Layout, Menu } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBook, FaBoxOpen } from "react-icons/fa";
 import { useState } from "react";
 import { TUser } from "../../../types";
@@ -13,6 +13,8 @@ const { Sider } = Layout;
 
 const Sidebar = ({ user }: { user: TUser }) => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
 
   const [isMobile, setIsMobile] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -29,19 +31,24 @@ const Sidebar = ({ user }: { user: TUser }) => {
     user?.role === "admin"
       ? [
           {
-            key: "1",
+            key: "user-management",
             icon: <UserOutlined />,
             label: <NavLink to="user-management">User Management</NavLink>,
+          },
+          {
+            key: "order-management",
+            icon: <FaBoxOpen />,
+            label: <NavLink to="order-management">Order Management</NavLink>,
           },
         ]
       : [
         {
-          key: "1",
+          key: "order-history",
           icon: <FaBoxOpen  />,
           label: <NavLink to="order-history">Order History </NavLink>,
         },
         {
-          key: "2",
+          key: "update-password",
           icon: <IoMdSettings  />,
           label: <NavLink to="update-password">Update Password</NavLink>,
         },
@@ -83,7 +90,7 @@ const Sidebar = ({ user }: { user: TUser }) => {
         </Link>
 
         {/* Sidebar Menu */}
-        <Menu mode="inline" defaultSelectedKeys={["1"]} items={items} />
+        <Menu mode="inline" defaultSelectedKeys={[location.pathname.split("/dashboard/")[1]]} items={items} />
         {!collapsed && 
         <div style={{  position: "absolute",
           bottom: 20,

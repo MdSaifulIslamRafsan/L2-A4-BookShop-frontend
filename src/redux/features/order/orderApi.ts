@@ -22,12 +22,37 @@ const orderApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getOrders: builder.query({
+      query: () => ({
+        url: `/orders`,
+        method: "GET",
+      }),
+    }),
     getOrdersByEmail: builder.query({
       query: (email) => ({
         url: `/orders/email/${email}`,
         method: "GET",
       }),
-    })
+    }),
+    deleteOrder: builder.mutation({
+      query: (orderId) => ({
+        url: `/orders/${orderId}`,
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // Include token for auth
+        },
+      }),
+    }),
+    updateOrderStatus: builder.mutation({
+      query: ({ orderId, status }) => ({
+        url: `/orders/${orderId}/status`,
+        method: "PATCH",
+        body: { status },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -36,4 +61,7 @@ export const {
   useVerifyOrderQuery,
   useGetOrderQuery, 
   useGetOrdersByEmailQuery,
+  useGetOrdersQuery,
+  useDeleteOrderMutation,
+  useUpdateOrderStatusMutation,
 } = orderApi;
