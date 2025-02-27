@@ -44,6 +44,7 @@ const aboutSections = [
     icon: <FaUsers style={{ fontSize: "30px", color: "#1890ff" }} />,
   },
 ];
+
 const reviews = [
   { text: "Great service and amazing quality!", name: "Sarah M." },
   { text: "Fast delivery and friendly support!", name: "John D." },
@@ -102,14 +103,10 @@ const About = () => {
       </Row>
 
       {/* Customer Reviews */}
-
       <div style={{ textAlign: "center", margin: "90px 0" }}>
-        <h2
-          style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "20px" }}
-        >
+        <Title className="font-open-sans" level={2}>
           Customer Reviews
-        </h2>
-
+        </Title>
         <Carousel
           autoplay
           dots={true}

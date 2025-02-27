@@ -78,7 +78,7 @@ const ProductManagement: React.FC = () => {
             key: "actions",
             render: (_: any, record: TProduct) => (
                 <Space>
-                    <Link to="/dashboard/update-product"><Button type="primary">Update</Button></Link>
+                    <Link to={`/dashboard/update-product/${record._id}`}><Button type="primary">Update</Button></Link>
                     <Button type="primary" danger onClick={() => handleDelete(record._id)}>Delete</Button>
                 </Space>
             ),

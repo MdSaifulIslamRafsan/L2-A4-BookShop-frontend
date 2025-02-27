@@ -19,7 +19,8 @@ import ProtectedRoute from "../component/layout/ProtectedRoute";
 import UpdatePassword from "../pages/user/UpdatePassword";
 import OrderManagement from "../pages/admin/OrderManagement";
 import ProductManagement from "../pages/admin/ProductManagement";
-import CreateProduct from './../pages/admin/CreateUpdate';
+import CreateProduct from '../pages/admin/CreateProduct';
+import UpdateProduct from "../pages/admin/UpdateProduct";
 
 
   export const router = createBrowserRouter([
@@ -82,6 +83,10 @@ import CreateProduct from './../pages/admin/CreateUpdate';
         {
           path: "create-product",
           element: <AdminProtectedRoute><CreateProduct/></AdminProtectedRoute>,
+        },
+        {
+          path: "update-product/:id",
+          element: <AdminProtectedRoute><UpdateProduct/></AdminProtectedRoute>,
         },
 
         // user routes

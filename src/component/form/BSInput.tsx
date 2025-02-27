@@ -8,9 +8,10 @@ type TBSInput = {
   fieldName: string;
   label?: string;
   placeholder?: string
+  defaultValue?: string
 };
 
-const BSInput = ({ type, fieldName, label , placeholder}: TBSInput) => {
+const BSInput = ({ type, fieldName, label , placeholder, defaultValue}: TBSInput) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -26,6 +27,7 @@ const BSInput = ({ type, fieldName, label , placeholder}: TBSInput) => {
               name={fieldName}
               placeholder={placeholder}
               required
+              defaultValue={defaultValue}
               size="large"
               suffix={
                 type === "password" ? (
