@@ -1,4 +1,4 @@
-import { Table, Tag, Dropdown, Button } from "antd";
+import { Table, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import {
   useUpdateUserRoleMutation,
@@ -21,9 +21,9 @@ const UserManagement: React.FC = () => {
   const { data, isLoading, refetch } = useUsersQuery(undefined);
   const [updateUserRole] = useUpdateUserRoleMutation();
   const [updateUserStatus] = useUpdateUserStatusMutation();
-  if (isLoading)  {
-    return <TableLoading></TableLoading>
-  };
+  if (isLoading) {
+    return <TableLoading></TableLoading>;
+  }
 
   const handleStatusChange = async (userId: string, isActive: boolean) => {
     try {
@@ -95,7 +95,15 @@ const UserManagement: React.FC = () => {
             ],
           }}
         >
-          <Button style={{ width: "100%", textAlign: "left", textTransform: "capitalize",  display: "flex", justifyContent: "space-between"  }}>
+          <Button
+            style={{
+              width: "100%",
+              textAlign: "left",
+              textTransform: "capitalize",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             {role} <DownOutlined />
           </Button>
         </Dropdown>
@@ -123,10 +131,16 @@ const UserManagement: React.FC = () => {
             ],
           }}
         >
-          <Button style={{ width: "100%", textAlign: "left",  display: "flex", justifyContent: "space-between"  }}>
-            <Tag color={isActive ? "green" : "red"}>
-              {isActive ? "Active" : "Inactive"}
-            </Tag>
+          <Button
+            style={{
+              width: "100%",
+              textAlign: "left",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            {isActive ? "Active" : "Inactive"}
+
             <DownOutlined />
           </Button>
         </Dropdown>

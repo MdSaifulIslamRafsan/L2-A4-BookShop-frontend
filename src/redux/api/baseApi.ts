@@ -14,7 +14,7 @@ interface MyErrorData {
   code: number;
 }
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: import.meta.env.VITE_API_BASE_URL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -35,7 +35,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     toast.error((result.error.data as MyErrorData).message)
   }
   if (result.error?.status === 401) {
-    const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/refresh-token`, {
       method: "POST",
       credentials: "include",
     });

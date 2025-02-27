@@ -58,6 +58,7 @@ This project is a Book Shop application built using **Vite React**, **Ant Design
    - Add the following variables:
      ```env
      VITE_API_BASE_URL=http://localhost:5000/api
+      VITE_IMAGE_HOSTING_KEY= your_imageBB_hosting_key
      ```
 
 4. **Run the application:**

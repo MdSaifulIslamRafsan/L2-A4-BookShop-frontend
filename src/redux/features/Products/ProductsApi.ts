@@ -1,24 +1,34 @@
 import { baseApi } from "../../api/baseApi";
 
-
 const authApi = baseApi.injectEndpoints({
-    endpoints: (builder) => ({
-        getProducts : builder.query({
-            query: () => ({
-                url: "/products",
-                method: "GET",
-            })
+  endpoints: (builder) => ({
+    getProducts: builder.query({
+      query: () => ({
+        url: "/products",
+        method: "GET",
+      }),
+    }),
+    createProduct: builder.mutation({
+        query: (productData) => ({
+          url: "/products",
+          method: "POST",
+          body: productData,
         }),
-        getProduct : builder.query({
-            query: (id) => ({
-                url: `/products/${id}`,
-                method: "GET",
-            })
-        }),
-      
-    })
-    
-})
+      }),
+    getProduct: builder.query({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "GET",
+      }),
+    }),
+    deleteProduct: builder.mutation({
+      query: (productId) => ({
+        url: `/products/${productId}`,
+        method: "DELETE",
+      }),
+    }),
+  }),
+});
 
-export const { useGetProductsQuery, useGetProductQuery } = authApi;
+export const { useGetProductsQuery, useGetProductQuery, useDeleteProductMutation, useCreateProductMutation } = authApi;
 export default authApi;

@@ -8,6 +8,8 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 import { IoMdSettings } from "react-icons/io";
+import { GiBookshelf } from "react-icons/gi";
+import { BiSolidBookAdd } from "react-icons/bi";
 
 const { Sider } = Layout;
 
@@ -39,6 +41,16 @@ const Sidebar = ({ user }: { user: TUser }) => {
             key: "order-management",
             icon: <FaBoxOpen />,
             label: <NavLink to="order-management">Order Management</NavLink>,
+          },
+          {
+            key: "create-product",
+            icon: <BiSolidBookAdd />,
+            label: <NavLink to="create-product">Create Product</NavLink>,
+          },
+          {
+            key: "product-management",
+            icon: <GiBookshelf />,
+            label: <NavLink to="product-management">Product Management</NavLink>,
           },
         ]
       : [

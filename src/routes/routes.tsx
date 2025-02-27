@@ -18,6 +18,8 @@ import AdminProtectedRoute from "../component/layout/AdminProtectedRoute";
 import ProtectedRoute from "../component/layout/ProtectedRoute";
 import UpdatePassword from "../pages/user/UpdatePassword";
 import OrderManagement from "../pages/admin/OrderManagement";
+import ProductManagement from "../pages/admin/ProductManagement";
+import CreateProduct from './../pages/admin/CreateUpdate';
 
 
   export const router = createBrowserRouter([
@@ -72,6 +74,14 @@ import OrderManagement from "../pages/admin/OrderManagement";
         {
           path: "order-management",
           element: <AdminProtectedRoute><OrderManagement/></AdminProtectedRoute>,
+        },
+        {
+          path: "product-management",
+          element: <AdminProtectedRoute><ProductManagement/></AdminProtectedRoute>,
+        },
+        {
+          path: "create-product",
+          element: <AdminProtectedRoute><CreateProduct/></AdminProtectedRoute>,
         },
 
         // user routes

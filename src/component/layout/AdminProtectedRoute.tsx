@@ -1,12 +1,15 @@
 import { ReactNode } from "react";
 import { useSelector } from "react-redux";
-import { selectCurrentUser, useCurrentToken } from "../../redux/features/auth/authSlice";
+import { logout, selectCurrentUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import { Navigate, useLocation } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { toast } from "sonner";
 
 const AdminProtectedRoute = ({ children }: { children: ReactNode }) => {
   const token = useSelector(useCurrentToken);
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
 
   if (!token) {
@@ -14,6 +17,8 @@ const AdminProtectedRoute = ({ children }: { children: ReactNode }) => {
   }
 
   if (user?.role !== "admin") {
+    dispatch(logout()); 
+    toast.success("Logout successful")
     return <Navigate to="/sign-in" state={{ from: location }} replace />;
   }
 
